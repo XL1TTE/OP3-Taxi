@@ -21,9 +21,9 @@ namespace OP3.MVVM.Model
             Name = name;
         }
 
-        public void TakeATaxi()
+        public void TakeATaxi(TaxiOrder.ArgsOfTaxiOrder OrderArgs)
         {
-
+            NotificationOfCustomer?.Invoke(OrderArgs);
         }
     }
 }

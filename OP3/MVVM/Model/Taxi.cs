@@ -21,7 +21,7 @@ namespace OP3.MVVM.Model
         {
             public string Number { get; set; }
             public string CarMark { get; set; }
-            bool ChildSeat { get; set; }
+            public bool ChildSeat { get; set; }
 
             public Car(string number, string carMark, bool childSeat)
             {
@@ -33,7 +33,7 @@ namespace OP3.MVVM.Model
 
         public class TaxiDriver
         {
-            public delegate void RespondedToOrder();
+            public delegate void RespondedToOrder(ArgsOfTaxiDriver argsOfTaxiDriver);
             public event RespondedToOrder NotificationOfDriver;
 
             public string Name { get; set; }
@@ -46,11 +46,16 @@ namespace OP3.MVVM.Model
             {
                 Name = name; 
                 Car = car;
+                IsFree = true;
             }
 
-            public void GoToOrder(TaxiOrder.ArgsOfTaxiOrder order)
+            public void GoToOrder(TaxiOrder.ArgsOfTaxiOrder o)
             {
-
+                if (IsFree && o.Order.IsChildSeatNeeded == Car.ChildSeat)
+                {
+                    NotificationOfDriver?.Invoke(new ArgsOfTaxiDriver(this));
+                }
+                
             }
         }
 

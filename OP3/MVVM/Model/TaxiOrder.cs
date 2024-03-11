@@ -9,9 +9,10 @@ namespace OP3.MVVM.Model
 {
     public class TaxiOrder
     {
+        static Random random = new Random();
         public class ArgsOfTaxiOrder
         {
-            Order Order { get; set; }
+            public Order Order { get; set; }
             public ArgsOfTaxiOrder(Order _order)
             {
                 Order = _order;
@@ -29,13 +30,14 @@ namespace OP3.MVVM.Model
                 House = house;
                 Street = street;
                 FullAdress = $"{Street} {House}";
+                Coordinates = (random.Next(0, 100), random.Next(0, 100));
             }
         }
         public class Order
         {
             public Address Departure { get; set; }
             public Address Destination { get; set; }
-            public bool IsHaveChildSeat { get; set; }
+            public bool IsChildSeatNeeded { get; set; }
             public double Distance { get; set; }
             public Taxi.TaxiDriver Driver { get; set; }
             public Customer Customer { get; set; }
@@ -45,7 +47,7 @@ namespace OP3.MVVM.Model
                 Customer = customer;
                 Departure = departure;
                 Destination = destination;
-                IsHaveChildSeat = isHaveChildSeat;
+                IsChildSeatNeeded = isHaveChildSeat;
             }
         }
     }

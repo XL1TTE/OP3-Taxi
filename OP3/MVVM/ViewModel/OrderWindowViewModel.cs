@@ -127,7 +127,16 @@ namespace OP3.MVVM.ViewModel
             TaxiAggregator.CreateAnOrder(new Customer(CustomerFIO), new TaxiOrder.Address(DepartureStreet, DepartureHome),
                 new TaxiOrder.Address(DestinationStreet, DestinationHome), ChildSeatNeeded);
             OrdersList = TaxiAggregator.Orders;
-            OrdersList[0].Driver = new Taxi.TaxiDriver("Володя", new Taxi.Car("12314", "Mercedes", false));
+            _ClearFields();
+        }
+        private void _ClearFields()
+        {
+            CustomerFIO = String.Empty;
+            DepartureStreet = String.Empty;
+            DepartureHome = String.Empty;
+            DestinationStreet = String.Empty;
+            DestinationHome = String.Empty;
+            ChildSeatNeeded = false;
         }
     }
 }
