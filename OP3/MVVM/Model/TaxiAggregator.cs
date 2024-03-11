@@ -18,7 +18,12 @@ namespace OP3.MVVM.Model
             new Taxi.TaxiDriver("Бэтмен", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Бэтмобиль", true)),
             new Taxi.TaxiDriver("Ведьмак", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Плотва", false)),
             new Taxi.TaxiDriver("Супермен", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Супермен", false)),
-            new Taxi.TaxiDriver("Флеш", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Спина", false))
+            new Taxi.TaxiDriver("Флеш", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Спина", false)),
+            new Taxi.TaxiDriver("Стивен", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Тесла Кибертрак", false)),
+            new Taxi.TaxiDriver("Робин", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Бэтмобиль", false)),
+            new Taxi.TaxiDriver("Соловей", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Плотва", false)),
+            new Taxi.TaxiDriver("Муравей", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Супермен", false)),
+            new Taxi.TaxiDriver("Зум", new Taxi.Car($"{random.Next(0, 26)}{random.Next(1000, 10000)}", "Спина", false))
         };
 
         public ObservableCollection<TaxiOrder.Order> Orders = new ObservableCollection<TaxiOrder.Order>()
@@ -47,21 +52,24 @@ namespace OP3.MVVM.Model
 
         public void FindBestDriver()
         {
+            List<double> Distances = new List<double>();
             double MinDistance = 1000000;
             Taxi.TaxiDriver BestDriver = null;
-            for(int i = 0; i < Orders.Count; i++)
+            for (int j = 0; j < TaxiDriversTemp.Count; j++)
             {
-                for (int j = 0; j < TaxiDriversTemp.Count; j++)
+                Distances.Add(Math.Sqrt(Math.Pow((TaxiDriversTemp[j].CurrentLocation.Item1 - Orders[^1].Departure.Coordinates.Item1), 2) +
+                    Math.Pow((TaxiDriversTemp[j].CurrentLocation.Item2 - Orders[^1].Departure.Coordinates.Item2), 2)));
+                if (Distances[j] < MinDistance)
                 {
-                    if (Math.Sqrt(Math.Pow((TaxiDriversTemp[j].CurrentLocation.Item1 - Orders[i].Departure.Coordinates.Item1), 2) +
-                        Math.Pow((TaxiDriversTemp[j].CurrentLocation.Item2 - Orders[i].Departure.Coordinates.Item2), 2)) < MinDistance)
-                    {
-                        BestDriver = TaxiDriversTemp[j];
-                    }
+                    BestDriver = TaxiDriversTemp[j];
+                    MinDistance = Distances[j];
                 }
-                if(BestDriver != null) { BestDriver.IsFree = false; }             
-                Orders[i].Driver = BestDriver;
             }
+            if (BestDriver != null) { BestDriver.IsFree = false; }
+            Orders[^1].Driver = BestDriver;
+            Distances.Clear();
+            TaxiDriversTemp.Clear();
+
         }
 
         public void AddReadyDriverInTempList(Taxi.ArgsOfTaxiDriver driverArgs)
