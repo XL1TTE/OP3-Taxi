@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "fT4+GbpXIi0R0SrN1JkJCfWnKQsvlSDEMDMtKHtiGFW6Irt+tTbRKpPVeV2BAMm/9OJD4piO3c0/06+kl7bVQw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Artyom\\source\\repos\\OP3\\OP3\\OP3.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Artyom\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\Artyom\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

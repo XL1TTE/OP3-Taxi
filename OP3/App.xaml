@@ -1,0 +1,22 @@
+﻿<Application x:Class="OP3.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:OP3"
+             xmlns:views="clr-namespace:OP3.MVVM.View"
+             xmlns:vms="clr-namespace:OP3.MVVM.ViewModel" >
+    <Application.Resources>
+
+        <DataTemplate DataType="{x:Type vms:MainWindowViewModel}">
+            <views:MainWindow/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:OrderWindowViewModel}">
+            <views:OrderWindow/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:TaxiDriversListWindowViewModel}">
+            <views:TaxiDriversListWindow/>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>
